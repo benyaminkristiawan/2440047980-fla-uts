@@ -5,10 +5,8 @@ import model.UserType;
 public class genderAdapter {
 	UserType username;
 	String gender;
-	
-	public genderAdapter(UserType username, String gender) {
+	public genderAdapter(String gender) {
 		super();
-		this.username = username;
 		this.gender = gender;
 	}
 

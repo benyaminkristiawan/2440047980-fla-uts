@@ -1,8 +1,8 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
+import adapter.genderAdapter;
 import builder.Director;
 import builder.GoldThemeBuilder;
 import builder.HeroesBuilder;
@@ -54,6 +54,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		UserType user;
 		String type;
+		String gender;
 		String username;
 		do {
 			System.out.println("Choose User Type [Standard | Gold | VIP ]: ");
@@ -64,6 +65,10 @@ public class Main {
 			System.out.println("Please input your Username [1-50 char]");
 			username=scan.nextLine();
 		} while (username.length()<1||username.length()>50);
+		do {
+			System.out.println("Please input your Gender [Male | Female]");
+			gender=scan.nextLine();
+		} while (!(gender.equals("Male") || gender.equals("Female") ));
 		user= factory.make(type, username);
 		
 		//menu selanjutnya!
@@ -73,12 +78,13 @@ public class Main {
 			System.out.println("Hello!");
 			System.out.println("1. Create Post");
 			System.out.println("2. Show Posts");
-			System.out.println("3. Exitt");
+			System.out.println("3. Show Profile");
+			System.out.println("4. Exitt");
 			do {
 				System.out.println(">>");
 				choice = scan.nextInt();
 				scan.nextLine();
-			} while (choice < 1 || choice > 3);
+			} while (choice < 1 || choice > 4);
 			switch (choice) {
 			case 1:
 				//createPost
@@ -204,7 +210,13 @@ public class Main {
 			case 2:
 				viewPost();
 				break;
-			case 3:
+			case 3 :
+				genderAdapter genreadapter = new genderAdapter(gender);
+				System.out.println("Username : "+genreadapter.getGender(gender)+user.getUsernames());
+				System.out.println("Your UserType"+user.getName());
+				System.out.println("Your benefit"+user.getBenefit());
+				break;
+			case 4:
 				return;
 			}
 		}
@@ -217,7 +229,6 @@ public class Main {
 		if (history==null) {
 			System.out.println("You did not post anything...");
 		}
-		
 		history.showPost();
 	}
 
